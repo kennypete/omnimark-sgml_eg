@@ -1,4 +1,7 @@
-= Omnimark SGML processing example
+= OmniMark SGML processing example
+:author: Peter Kenny
+:doctype: article
+:icons: font
 
 This is a simple example of using OmniMark v5.5 to process SGML.
 That OmniMark version was distributed as freeware, as
@@ -8,7 +11,7 @@ http://xml.coverpages.org/omniMark19990517.html[described here].
 
 * *sgml_eg.dtd* - A simple SGML document type definition with only a couple
 of elements, `eg` and `p`, and one CDATA entity, `cent`.
-* *sgml_eg.sgm* - A four-line SGML file, which is the source file for the
+* *sgml_eg.sgm* - A four-line SGML file, which is the source for the
 processing.  It has several features that make SGML both powerful and/or
 problematic, depending on what you are doing, with absent end tags being
 the prime example.  They are extraordinarily useful if trying to convert to
