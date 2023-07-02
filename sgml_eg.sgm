@@ -1,0 +1,11 @@
+<!--This is a very small example of using Ominmark/OMLE to process SGML.-->
+<!--The example uses omitted end tags to illustrate their power -
+    valid SGML because the DTD uses  - O  for the ELEMENTS eg and p.-->
+<!--It also uses the named character reference entity (&cent;)
+    and a Unicode UTF-8 character, 🖐 (U+1F590; UTF-8 f0 9f 96 90).-->
+<!--Refer the commentary in sgml_eg.dtd for how these work in practice,
+    noting the use of a CDATA section too, below, to output "as-is".-->
+<eg>SGML processing.
+<p>This is an example of processing a cent ENTITY: &cent; (i.e., where the entity is defined in the DTD as<![CDATA[ <!ENTITY cent CDATA "¢">, which will render &cent; as ¢]]>.
+<p>This is an example of a cent UTF-8 character: ¢.
+<p>This is an example of a raised had with fingers splayed: 🖐.

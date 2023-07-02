@@ -1,0 +1,48 @@
+; A basic sgml processing
+; omnimark -s sgml_eg.xom sgml_eg.xml [-of sgml_eg.txt]
+
+PROCESS
+
+; Create the shelf for the DTD.  This means that if there were several files
+; the DTD would not need to be reloaded every time.
+DO SGML-PARSE DOCUMENT
+  CREATING SGML-DTDS KEY "sgml_eg.dtd"
+  SCAN FILE ".\sgml_eg.dtd"
+  SUPPRESS
+DONE
+
+; In this case there is only one instance (file), which uses the DTD (above).
+DO SGML-PARSE INSTANCE
+  WITH SGML-DTDS KEY "sgml_eg.dtd"
+  SCAN FILE #COMMAND-LINE-NAMES
+  OUTPUT "%c"
+DONE
+
+; The p element we want separated by newlines (%n).  Note that because this
+; is the Windows version of omle, the output file will always be "DOS"
+; file format, i.e., with CRLF newlines, not "Unix" file format with LF
+; newlines.  (If "Unix" is wanted, post processing will be required.)
+ELEMENT p
+  OUTPUT "%c%n"
+
+; Using an #IMPLIED element rule is efficient.
+ELEMENT #IMPLIED
+  OUTPUT "%c"
+
+; *** ENTITIES / UNICODE / UTF-8 *****
+; NB: If the sgml_eg DTD defined CDATA entities like the HTML4 SGML DTD, i.e.:
+;   <!ENTITY cent   CDATA "&#162;" -- cent sign, U+00A2 ISOnum -->
+; ... there would need to be a TRANSLATE rule for each CDATA entity like this
+; (to get the UTF-8 character in the output):
+;   TRANSLATE CDATA NAMED 'cent'
+;     OUTPUT "¢"
+;
+; But because the DTD has been structured to have the CDATA entity be the
+; Unicode character (U+000A2), there is no translation needed.
+;
+;   "OmniMark works as a byte processor, not a character number processor."
+;
+; In terms of "pure" Unicode UTF-8 characters in the input stream,
+; such as 🖐 (U+1F590; UTF-8 f0 9f 96 90) in the example, that will be
+; left as-is in output stream as it us just #PCDATA, noting the quote above.
+

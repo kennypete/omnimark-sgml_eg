@@ -1,0 +1,29 @@
+<!DOCTYPE eg [
+
+<!ELEMENT eg - O (#PCDATA | p)+ >
+
+<!ELEMENT p - O (#PCDATA) >
+
+<!ENTITY cent CDATA "¢" -- Unicode UTF-8 cent sign: c2 a2 -->
+<!--This, above, is the Unicode UTF-8 representation of the
+     character, noting that this DTD itself is ff unix and
+     fenc utf-8. Therefore, when &cent; is encountered in
+     the input stream it is output as "¢".  The SGML (HTML4)
+     https://www.w3.org/TR/html401/sgml/entities.html
+     Character entity references for ISO 8859-1 characters
+     produce decimal character references, which is what
+     works (though is now less common than hexadecimal)
+     for HTML2+, e.g.:
+       <!ENTITY cent   CDATA "&#162;"> cent sign, U+00A2 ISOnum
+
+     For HTML5 processing you could include the full named
+     character references list, i.e.:
+     https://html.spec.whatwg.org/#named-character-references
+     as ENTITY declarations, which would look like this:
+       <!ENTITY Aacute CDATA "Á">
+       <!ENTITY aacute CDATA "á">
+       <!ENTITY Abreve CDATA "á">
+     ...and so forth.
+     -->
+
+]>

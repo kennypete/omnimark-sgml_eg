@@ -1,0 +1,44 @@
+= Omnimark SGML processing example
+
+This is a simple example of using OmniMark v5.5 to process SGML.
+That OmniMark version was distributed as freeware, as
+http://xml.coverpages.org/omniMark19990517.html[described here].
+
+== Files
+
+* *sgml_eg.dtd* - A simple SGML document type definition with only a couple
+of elements, `eg` and `p`, and one CDATA entity, `cent`.
+* *sgml_eg.sgm* - A four-line SGML file, which is the source file for the
+processing.  It has several features that make SGML both powerful and/or
+problematic, depending on what you are doing, with absent end tags being
+the prime example.  They are extraordinarily useful if trying to convert to
+a more structured end state, e.g., XML, where the omission of end tags is
+not permitted.
+* *sgml_eg.xom* - The OmniMark script, which parses the SGML DTD
+(`sgml_eg.dtd`) and the instance (`sgml_eg.sgm`) and applies only two
+element rules.
+* *sgml_eg_ps1* - A PowerShell script to run the process.  Since all of the
+files are in the same directory, this is straightforward.  It should be run
+with PowerShell 7, ideally, though the key point is that if the output does
+not look right (odd characters), it is probably not UTF-8 enabled.
+* *omnimark.exe* - As noted above, OmniMark was made free in 1999.  This .exe
+is the last version that was released under that model.  After that, from
+version 6 OmniMark reverted to being paid software.
+
+There are several comments included in these files, which expand on some
+points outlined here plus more.  Of particular note is the commentary
+regarding CDATA entities in the `sgml_eg.xom` and `sgml_eg.dtd` files.
+
+== Installation and Execution
+
+Either `git clone https://github.com/kennypete/omnimark-sgml_eg.git` or use
+https://github.com/kennypete/omnimark-sgml_eg/archive/refs/heads/main.zip to
+download a .zip file.  It is then simply a matter of running `sgml_eg.ps1` or
+the command `.\omnimark -brief -s sgml_eg.xom sgml_eg.sgm -of sgml_eg.txt`
+to run the script over the DTD and SGML files, generating `sgml_eg.txt`.
+
+[NOTE]
+OmniMark v5.5, omnimark.exe, will run on Windows (cmd.exe, PowerShell) and,
+to my surprise, on Debian WSL (1.14.0.0), which I presume is using Windows'
+compatibility layer present in WSL.
+
